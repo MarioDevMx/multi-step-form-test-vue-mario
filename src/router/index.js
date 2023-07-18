@@ -1,19 +1,22 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+import FirstStep from "../components/FirstStep.vue";
+import SecondStep from "../components/SecondStep";
+import ThirdStep from "../components/ThirdStep.vue";
+import FourthStep from "../components/FourthStep.vue";
+import FifthStep from "../components/FifthStep.vue";
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
+    redirect: '/first',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
     children: [
-      {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-      },
+      { path: 'first', component: FirstStep },
+      { path: '/second', component: SecondStep},
+      { path: 'third', component: ThirdStep, name: 'ThirdStep', props: true },
+      { path: 'fourth', component: FourthStep, name: 'FourthStep', props: true },
+      { path: 'fifth', component: FifthStep }
     ],
   },
 ]
